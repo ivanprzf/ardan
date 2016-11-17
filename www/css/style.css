@@ -1,0 +1,134 @@
+/* Empty. Add your own CSS if you like */
+
+.animate-show {
+  line-height: 20px;
+  /*opacity: 1;*/
+  padding: 10px;
+  border: 1px solid black;
+  background: white;
+}
+
+.animate-show.ng-hide-add, .animate-show.ng-hide-remove {
+  transition: all linear 0.2s;
+}
+
+.animate-show.ng-hide {
+  line-height: 0;
+/*opacity: 0;*/
+  padding: 0 10px;
+  height: 0px;
+}
+
+
+.button-float{
+  height: 3rem;
+  width:3rem;
+  z-index: 12 !important;
+  position: absolute !important; 
+  top: 50px !important;
+  right: 10px !important;
+  border-radius: 50% !important;
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26) !important;
+}
+
+.button-float2{
+  height: 3rem;
+  width:3rem;
+  z-index: 12 !important;
+  position: absolute !important;
+  top: 110px !important;
+  right: 10px !important;
+  border-radius: 50% !important;
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26) !important;
+}
+
+.badgeboton{
+  top: -18px !important;
+  left: -15px;
+}
+
+.has-massubheader {
+    top: 100px;
+}
+
+.bar-massubheader {
+    top: 44px;
+    display: block;
+    height: 60px;
+}
+
+.rojo-ardan-fondo{
+  background-color: #C20000;
+}
+
+.rojo-ardan{
+  color: #C20000;
+}
+
+.gris-ardan-fondo{
+  background-color: #A8A8A8;
+}
+
+.gris-ardan{
+  color: #A8A8A8;
+}
+
+.azul-twitter{
+  color: #4099FF;
+}
+
+.azul-facebook{
+  color: #3b5999;
+}
+
+.azul-linkedin{
+  color: #0479B6;
+}
+
+.rojo-youtube{
+  color: #E62117;
+}
+
+.imagen-cabecera{
+  max-height: 100%;
+  margin:0 auto;
+}
+
+#map {
+  width: 100%;
+  height: 100%;
+}
+
+.imgindicador{
+  padding: 0 5px;
+  width: 25%;
+}
+
+.fondologoficha{
+  background-size: 50% !important;
+  background-repeat:no-repeat !important;
+  background-position-x: 50% !important;
+  background-position-y: 30% !important;
+}
+
+.fondoinfoindicador{
+  background-size: 80% !important;
+  background-repeat: no-repeat !important;
+  background-position: center !important;
+}
+
+.textoinfoindicador{
+  background-color: rgba(250, 250, 250, 0.65);
+  padding: 5px 10px;
+  min-height: 100%;
+  text-align: justify;
+  font-weight: bold;
+}
+
+.button.button-icon.input-button {
+  position: absolute;
+  right: 5px;
+  top: 10px;
+  color: #bbb;
+  z-index: 9;
+}

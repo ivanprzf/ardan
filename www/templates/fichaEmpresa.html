@@ -1,0 +1,108 @@
+<div class="modal">
+        <!-- Modal header bar -->
+        <ion-header-bar class="bar-secondary">
+          <h1 class="title">Ficha Empresa</h1>
+          <button class="button button-clear button-dark" ng-click="cierraFicha()"><i class="icon ion-close-round"></i></button>
+        </ion-header-bar>
+
+        <!-- Modal content area -->
+        <ion-content class="fondologoficha" style="background:url({{empresa.logo}});">
+          <div class="list card" style="opacity:0.9;">
+            <div ng-href="" class="item item-icon-left item-text-wrap">
+              <i class="icon ion-bookmark"></i>
+              {{empresa.empresa}}<br/><b>{{empresa.cif}}</b> 
+            </div>
+            <a ng-href="tel:+34{{empresa.telefono}}" class="item item-icon-left" ng-class="empresa.telefono ? 'ng-show' : 'ng-hide'">
+              <i class="icon ion-ios-telephone"></i>
+              {{empresa.telefono}}
+            </a>
+            <a ng-href="mailto:{{empresa.email}}" class="item item-icon-left" ng-class="empresa.email ? 'ng-show' : 'ng-hide'">
+              <i class="icon ion-email"></i>
+              {{empresa.email}}
+            </a>
+            <div ng-click="openBrowser(empresa.web)" class="item item-icon-left" ng-class="empresa.web ? 'ng-show' : 'ng-hide'">
+              <i class="icon ion-link"></i>
+              {{empresa.web}}
+            </div>
+            <div ng-click="empresa.latitud && empresa.longitud ? openBrowserGMaps(empresa.latitud,empresa.longitud) : null" class="item item-icon-left item-text-wrap" ng-class="empresa.domicilio || empresa.provincia ? 'ng-show' : 'ng-hide'">
+              <i class="icon ion-ios-location"></i>
+              {{empresa.localidad}} ({{empresa.provincia}})<br/>
+              {{empresa.domicilio}}
+            </div>
+
+            <!-- Actividad  -->
+            <div class="item item-divider" ng-class="empresa.cnaetexto2unido || empresa.sps ? 'ng-show' : 'ng-hide'">
+              Actividad
+            </div>
+            <div class="item item-text-wrap" ng-class="empresa.cnaetexto2unido ? 'ng-show' : 'ng-hide'">         
+              <div class="row">
+                <div class="col"><b>CNAE- 2009  Clasificación Nacional Actividades Económicas</b></div>
+                <div class="col col-50">{{empresa.cnaetexto2unido}}</div>
+              </div>
+              <div class="row">
+                <div class="col col-50 col-offset-50">{{empresa.cnaetextounido}}</div>
+              </div>
+            </div>
+            <div class="item item-text-wrap" ng-class="empresa.sps ? 'ng-show' : 'ng-hide'">         
+              <div class="row">
+                <div class="col"><b>Sistema Productivo Sectorial</b></div>
+                <div class="col">{{empresa.sps}}</div>
+              </div>
+              <div class="row">
+                <div class="col col-50 col-offset-50">{{empresa.actividadreferencias}}</div>
+              </div>
+            </div>
+
+            <!-- Información Economica  -->
+            <div class="item item-divider" ng-class="empresa.anoe || empresa.anoconstitucion || empresa.npinge || empresa.nprbex || empresa.npreje || empresa.nppatn || empresa.npempt ? 'ng-show' : 'ng-hide'">
+              Información Económica
+            </div>
+            <div class="item item-text-wrap" ng-class="empresa.anoe ? 'ng-show' : 'ng-hide'">         
+              <div class="row">
+                <div class="col"><b>Último ejercicio disponible</b></div><div class="col text-right assertive"><b>{{empresa.anoe}}</b></div>
+              </div>
+            </div>
+            <div class="item item-text-wrap" ng-class="empresa.anoconstitucion ? 'ng-show' : 'ng-hide'">         
+              <div class="row">
+                <div class="col"><b>Año de Constitución</b></div><div class="col text-right"><b>{{empresa.anoconstitucion}}</b></div>
+              </div>
+            </div>
+            <div class="item item-text-wrap" ng-class="empresa.npinge ? 'ng-show' : 'ng-hide'">         
+              <div class="row">
+                <div class="col"><b>Ingresos</b></div><div class="col text-right">{{empresa.npingef}} €</div>
+              </div>
+            </div>
+            <div class="item item-text-wrap" ng-class="empresa.nprbex ? 'ng-show' : 'ng-hide'">         
+              <div class="row">
+                <div class="col"><b>Ebitda</b></div><div class="col text-right">{{empresa.nprbexf}} €</div>
+              </div>
+            </div>
+            <div class="item item-text-wrap" ng-class="empresa.npreje ? 'ng-show' : 'ng-hide'">         
+              <div class="row">
+                <div class="col"><b>Resultado del ejercicio</b></div><div class="col text-right">{{empresa.nprejef}} €</div>
+              </div>
+            </div>
+            <div class="item item-text-wrap" ng-class="empresa.nppatn ? 'ng-show' : 'ng-hide'">         
+              <div class="row">
+                <div class="col"><b>Patrimonio neto</b></div><div class="col text-right">{{empresa.nppatnf}} €</div>
+              </div>
+            </div>
+            <div class="item item-text-wrap" ng-class="empresa.npempt ? 'ng-show' : 'ng-hide'">         
+              <div class="row">
+                <div class="col"><b>Número de empleados</b></div><div class="col text-right">{{empresa.npempt}}</div>
+              </div>
+            </div>
+
+            <!-- Indicadores -->
+            <div class="item item-divider" ng-class="indicadoresempresa ? 'ng-show' : 'ng-hide'">
+              Indicadores
+            </div>
+            <div ng-href="" class="item item-icon-left" ng-class="indicadoresempresa ? 'ng-show' : 'ng-hide'">
+              <i class="icon ion-ribbon-b"></i>
+              <ion-scroll direction="x">
+                <img ng-repeat="indicador in indicadoresempresa" ng-src="img/indicadores/{{indicador}}" ng-click="abreInfoIndicador($event,'{{indicador}}')" class="image-list-thumb imgindicador"/>
+              </ion-scroll>
+            </div>
+          </div>   
+        </ion-content>
+      </div>

@@ -1,0 +1,68 @@
+<div class="modal">
+        <!-- Modal header bar -->
+        <ion-header-bar class="bar-secondary">
+          <h1 class="title">Filtro</h1>
+          <button class="button button-clear button-dark" ng-click="cerrarFiltros()"><i class="icon ion-close-round"></i></button>
+        </ion-header-bar>
+
+        <!-- Modal content area -->
+        <ion-content>
+          <!-- Select sps -->
+          <label class="item item-input item-select">
+            <div class="input-label">
+              SPS
+            </div>
+            <select id="sps" name="sps" ng-model="filtros.sps">
+              <option ng-repeat="sps in spss" value="{{sps.value}}">{{sps.name}}</option>
+            </select>
+          </label>
+          <!-- Select tamaño -->
+          <label class="item item-input item-select">
+            <div class="input-label">
+              Tamaño<br/>de empresa
+            </div>
+            <select ng-model="filtros.tam">              
+              <option ng-repeat="tamano in tamanos" value="{{tamano.value}}">{{tamano.name}}</option>
+            </select>
+          </label>
+          <!-- Select ultimo año ejercicio -->
+
+
+          <!-- Select multiple indicadores -->
+          <label class="item item-input item-select">
+            <div class="input-label">
+              Indicadores
+            </div>
+            <select multiple="multiple" ng-model="filtros.indicadores">
+              <option ng-repeat="indicador in indicadores" value="{{indicador.value}}">{{indicador.name}}</option>
+            </select>
+          </label>
+          <!-- Check con email -->
+          <label class="item item-toggle">
+            Con Email
+            <label class="toggle toggle">
+              <input type="checkbox" ng-model="filtros.conemail">
+              <div class="track">
+                <div class="handle"></div>
+              </div>
+            </label>
+          </label>
+          <!-- CCAA -->
+          <label class="item item-input item-select">
+            <div class="input-label">
+              Región
+            </div>
+            <select multiple="multiple" ng-model="filtros.ccaa">
+              <option ng-repeat="comunidad in ccaa" value="{{comunidad.value}}">{{comunidad.name}}</option>
+            </select>
+          </label>
+          <!-- Select año ejercicio -->
+          <label class="item item-input item-select">
+            <span class="input-label">Ultimo<br/>ejercicio</span>
+            <select id="anoe" name="anoe" ng-model="filtros.anoe">
+              <option ng-repeat="ano in anos" value="{{ano.value}}">{{ano.name}}</option>
+            </select>
+          </label>
+          <button class="button button-full button-dark" ng-click="aplicarFiltros()">Aplicar Filtros</button>
+        </ion-content>
+      </div>

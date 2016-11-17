@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Ardán</title>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+
+    <link href="lib/ionic/css/ionic.css" rel="stylesheet">
+
+    <!-- your personal css -->
+    <link href="css/style.css" rel="stylesheet">
+
+    <!-- ionic/angularjs js -->
+    <script src="lib/ionic/js/ionic.bundle.js"></script>
+    
+    <script src="lib/ionic/js/ng-cordova.min.js"></script>
+    <!-- cordova script (this will be a 404 during development) -->
+    <script src="cordova.js"></script>
+
+    <!-- your app's js -->
+    <script src="js/app.js"></script>
+    <!-- ng-fx.js -->
+    <script src="lib/ionic/js/angular/ng-fx.min.js"></script>
+
+    <!-- GMaps API -->
+    <!--<script src="js/gmaps.min.js"></script>-->
+    <script src="http://maps.googleapis.com/maps/api/js"></script>
+    <script src="js/oms.min.js"></script>
+
+  </head>
+  <body ng-app="starter" ng-controller="ArdanCtrl">
+    <ion-pane>
+      <ion-header-bar class="rojo-ardan-fondo">
+        <!-- <h1 class="title"></h1> -->
+        <img src="img/ardan.png" class="imagen-cabecera" alt="Imagen Ardan cabecera">
+      </ion-header-bar>
+      <ion-tabs class="tabs-dark tabs-icon-top">
+        <!-- Buscar -->
+        <ion-tab title="Buscar" icon="ion-search">
+          <ion-view title="Buscar"> 
+            <div class="bar bar-massubheader">
+              <label class="item item-input">
+                <i class="icon ion-search placeholder-icon"></i>
+                <input type="search" placeholder="Busqueda" ng-model="empresas.search" ng-change="buscaempresas()">
+              </label>
+              <button class="input-button button button-icon ion-android-close" ng-if="empresas.search.length" ng-click="borrasearch()"></button>
+            </div>        
+            <ion-content class="has-massubheader" has-bouncing="true">  
+              <ion-list>
+                <ion-item ng-click="abreFicha(empresa.cif)" collection-repeat="empresa in empresasbuscadas"><b>{{empresa.cif}}</b> {{empresa.nom}}</ion-item>
+              </ion-list>
+            </ion-content>
+          </ion-view>
+        </ion-tab>
+        <!-- Filtrar -->
+        <ion-tab title="Filtrar" icon="ion-funnel">
+          <ion-view title="Filtrar">
+            <button class="button button-positive button-float" ng-click="abreFiltros()">
+              <i class="icon ion-funnel"></i><span class="badge badgeboton badge-assertive">{{empresasFiltradas.length}}</span>
+            </button>
+            <button class="button button-energized button-float2" ng-click="abreMapa()">
+              <i class="icon ion-android-compass"></i>
+            </button>
+            <ion-content has-bouncing="true">           
+              <ion-list>
+                <ion-item ng-click="abreFicha(empresa.cif)" collection-repeat="empresa in empresasFiltradas"><b>{{empresa.cif}}</b> {{empresa.empresa}}</ion-item>
+              </ion-list>
+            </ion-content>
+          </ion-view>
+        </ion-tab>
+
+        <!-- Productos -->
+        <ion-tab title="Productos" icon="ion-ios-book">
+          <ion-view title="Productos">
+            <ion-content has-bouncing="true">
+              <div class="list card">
+                <div class="item item-avatar item-text-wrap" ng-click="descargable = !descargable"><img src="img/prodbddesc.png" alt="Imagen Base de Datos Descargable"/>Base de Datos Descargable 2016</div>
+                <div ng-if="descargable" class="fx-fade-right">
+                  <ion-list>
+                    <ion-item ng-repeat="caracteristica in ardan.descargable" class="item-text-wrap">
+                      {{caracteristica}}
+                    </ion-item>
+                  </ion-list>
+                </div>
+              </div>
+              <div class="list card">
+                <div class="item item-avatar item-text-wrap" ng-click="libro15 = !libro15"><img src="img/15_libro.png" alt="Imagen Informe Económico y Competitividad 2015"/>Informe Económico y de Competitividad 2015 (publicación)</div>
+                <div ng-if="libro15" class="fx-fade-right">
+                  <ion-list>
+                    <ion-item ng-repeat="caracteristica in ardan.libro15" class="item-text-wrap">
+                      {{caracteristica}}
+                    </ion-item>
+                  </ion-list>
+                </div>
+              </div>
+              <div class="list card">
+                <div class="item item-avatar item-text-wrap" ng-click="suscripcion = !suscripcion"><img src="img/prodsus.jpg" alt="Imagen Acceso a Base de Datos Suscripción"/>Acceso base de datos on-line SUSCRIPCIÓN</div>
+                <div ng-if="suscripcion" class="fx-fade-right">
+                  <ion-list>
+                    <ion-item ng-repeat="caracteristica in ardan.suscripcion" class="item-text-wrap">
+                      {{caracteristica}}
+                    </ion-item>
+                  </ion-list>
+                </div>
+                <div class="item item-avatar item-text-wrap" ng-click="marketing = !marketing"><img src="img/prodmk.jpg" alt="Imagen Acceso a Base de Datos Marketing"/>Acceso base de datos on-line MARKETING</div>
+                <div ng-if="marketing" class="fx-fade-right">
+                  <ion-list>
+                    <ion-item ng-repeat="caracteristica in ardan.marketing" class="item-text-wrap">
+                      {{caracteristica}}
+                    </ion-item>
+                  </ion-list>
+                </div>
+                <div class="item item-avatar item-text-wrap" ng-click="completo = !completo"><img src="img/prodcpt.jpg" alt="Imagen Acceso a Base de Datos Completo"/>Acceso base de datos on-line COMPLETO</div>
+                <div ng-if="completo" class="fx-fade-right">
+                  <ion-list>
+                    <ion-item ng-repeat="caracteristica in ardan.completo" class="item-text-wrap">
+                      {{caracteristica}}
+                    </ion-item>
+                  </ion-list>
+                </div>               
+              </div>
+              <div class="item item-avatar item-icon-left item-text-wrap" ng-click="openBrowser('{{ardan.webproductos}}')")>
+                <i class="icon ion-information"></i>
+                  Para adquirir cualquiera de nuestros productos, acceda a nuestra web {{ardan.web}}                                
+              </div>
+            </ion-content>
+          </ion-view>
+        </ion-tab>
+        <!-- Contacto -->
+        <ion-tab title="Contacto" icon="ion-android-contact">
+            <ion-view title="Contacto">
+              <ion-content overflow-scroll="false" has-bouncing="true">
+                <div class="list card">
+                  <div ng-click="openBrowserGMaps('{{ardan.lat}}','{{ardan.lng}}')" class="item item-icon-left item-text-wrap">
+                    <i class="icon ion-home"></i>
+                    {{ardan.direccion}}
+                  </div>                  
+                  <a ng-href="tel:+34{{ardan.tlf}}" class="item item-icon-left">
+                    <i class="icon ion-ios-telephone"></i>
+                    {{ardan.tlf}}
+                  </a>                  
+                  <a ng-href="mailto:{{ardan.email}}" class="item item-icon-left">
+                    <i class="icon ion-email"></i>
+                    {{ardan.email}}
+                  </a>
+                  <div class="item item-icon-left item-text-wrap">
+                    <i class="icon ion-calendar"></i>
+                    {{ardan.horario}}
+                  </div>
+                  <div ng-click="openBrowser('{{ardan.web}}')" class="item item-icon-left">
+                    <i class="icon ion-link"></i>
+                    {{ardan.web}}
+                  </div>
+                  <div class="item row">
+                    <div class="col azul-twitter button button-icon icon ion-social-twitter" ng-click="openBrowser('{{ardan.twitter}}')"></div>
+                    <div class="col azul-facebook button button-icon icon ion-social-facebook" ng-click="openBrowser('{{ardan.facebook}}')"></div>
+                    <div class="col azul-linkedin button button-icon icon ion-social-linkedin" ng-click="openBrowser('{{ardan.linkedin}}')"></div>
+                    <div class="col rojo-youtube button button-icon icon ion-social-youtube" ng-click="openBrowser('{{ardan.youtube}}')"></div>
+                  </div>
+                </div>                              
+              </ion-content>
+            </ion-view>
+        </ion-tab>
+      </ion-tabs>
+    </ion-pane>
+  </body>
+</html>
